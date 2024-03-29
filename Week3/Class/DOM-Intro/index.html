@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form-id" action="" onsubmit="handleSubmit(event)">
+        First Name : <input type="text" value="Ram">
+        Last Name : <input type="text" value="Ram">
+       
+        <button type="submit">Try it</button>
+    </form>
+
+    <p id="display-area"></p>
+
+    <script>
+        function handleSubmit(event){
+            event.preventDefault(); // prevent default form submission
+            let length = document.getElementById("form-id").elements.length;
+            let firstName = document.getElementById("form-id").elements[0].value;
+
+            console.log(length)
+            document.getElementById("display-area").innerHTML = "Found " + length + " items and the first name is " + firstName
+        }
+    </script>
+</body>
+</html>

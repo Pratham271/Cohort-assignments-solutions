@@ -1,0 +1,148 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* background-color: black; */
+    
+}
+
+.background-container {
+    position: relative; /* Ensure positioning context for absolutely positioned elements */
+    height: 72vh; /* Adjust height as needed */
+    width: 100%; /* Adjust width as needed */
+}
+
+.background-image {
+    /* background-image: inear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%); */
+    background-image: url("landing.jpeg");
+    background-size: cover; /* Optionally, to make the image cover the entire container */
+    background-position: center; /* Optionally, to center the background image */
+    height: 100%; /* Adjust height as needed */
+    width: 100%; /* Adjust width as needed */
+    position: relative; /* Ensure positioning context for absolutely positioned elements */
+    
+}
+
+.background-image h1{
+    display: flex;
+    justify-content: space-between;
+    color: rgb(229,9,20); /* Text color */
+   background: none;
+   padding-top: 20px;
+}
+
+.background-image p {
+    display: flex;
+    justify-content: space-between;
+    color: white; /* Text color */
+   background: none; 
+}
+
+.navbar{
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 100px;
+    padding-right: 100px;
+    height: 60px;
+    border: none;
+    text-align: center;
+}
+
+.Signin{
+border: none;
+background-color: rgb(229,9,20);
+padding: 10px 20px;
+border-radius: 5px;
+font-weight: 400;
+top: 10px;
+right: 100px;
+position: absolute;
+text-align: center;
+}
+
+.language{
+    background-color: transparent;
+    position: absolute;
+    color: white;
+    top: 10px;
+    right: 250px;
+    border: 1px solid white;
+    padding: 10px 20px;
+
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    background: none;
+    color: white;
+    padding-top: 160px;
+    font-size: 28px;
+    font-weight: 900;
+   
+}
+
+.sub-heading{
+    display: flex;
+    justify-content: center;
+    background: none;
+    color: white;
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 600;  
+}
+
+.input{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+input{
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    color: white;
+    padding: 8px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-right: 20px;
+    outline: none;
+}
+
+button{
+    width: 200px;
+    border: none;
+    background-color: rgb(229,9,20);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.text-container{
+    height: 100%;
+    background-color: rgb(0 0 0 / 40%);
+}
+
+.partition{
+    width: 100%;
+  height: 0.5rem;
+  top: 90;
+  position: absolute;
+  /* bottom: -0.5rem; */
+  background-color: rgb(35,35,35);
+  color: rgb(255,255,255);
+  text-align: center;
+}
+
+.section{
+    display: flex;
+    height: 100%;
+    background-color: black;
+    color: rgb(255,255,255);
+    text-align: center;
+    /* position: relative; */
+    padding: 4.5rem 0;
+    font-size: 25px;
+}

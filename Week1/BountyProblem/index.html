@@ -1,0 +1,176 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="shortcut icon" type="image/x-icon" href="logo.png" />
+        <link rel="stylesheet" href="style.css">
+        <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
+        <link href="https://unpkg.com/videojs-markers-plugin@1.0.2/dist/videojs.markers.plugin.min.css" rel="stylesheet">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <video
+                id="my-player"
+                class="video-js"
+                controls
+                preload="auto"  
+                poster="//vjs.zencdn.net/v/oceans.png"
+                data-setup='{}'>
+                <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>
+                <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
+                <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>
+            </video>
+            <div id="timestamps" >
+                <a href="#" data-time="10">Introduction 00:10</a>
+                <hr>
+                <a href="#" data-time="15">Start 00:15</a>
+                <hr>
+                <a href="#" data-time="25">Dive 00:25</a>
+                <hr>
+                <a href="#" data-time="30">Attack 00:30</a>
+                <hr>
+                <a href="#" data-time="36">Food 00:36</a>
+                <hr>
+                <a href="#" data-time="40">Towards End 00:40</a>
+                <hr>
+                <a href="#" data-time="45">End 00:45</a>
+            </div>
+        </div>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script> -->
+        <script src="https://vjs.zencdn.net/8.9.0/video.js"></script>
+        <script src='https://unpkg.com/videojs-markers-plugin@1.0.2/dist/videojs-markers-plugin.min.js'
+            crossorigin="anonymous"></script>
+        <script src="./videojs-sprite-thumbnails/dist/videojs-sprite-thumbnails.min.js"></script>
+    <script>
+        // Initializing the video player
+        var player = videojs('my-player', {
+            plugins: {
+                markers: {
+                    markers: [
+                        { time: 10, text: 'Introduction 00:10', overlayText: 'Introduction' },
+                        { time: 15, text: 'Start 00:15', overlayText: 'Start' },
+                        { time: 25, text: 'Dive 00:25', overlayText: 'Dive' },
+                        { time: 30, text: 'Attack 00:30', overlayText: 'Attack' },
+                        { time: 36, text: 'Food 00:36', overlayText: 'Food' },
+                        { time: 40, text: 'Towards End 00:40', overlayText: 'Towards End' },
+                        { time: 45, text: 'End 00:45', overlayText: 'End' },
+                    ],
+                    markerTip: {
+                        display: true,
+                        text: function(marker) {
+                            return marker.text;
+                        },
+                    },
+                },
+            },
+        });
+
+        
+            // set up 160x90 thumbnails in single sprite.jpg, 1 per second
+            player.spriteThumbnails({
+                url: 'https://example.com/sprite.jpg',
+                width: 160,
+                height: 90,
+                columns: 10
+            });
+        
+        var timestamps = document.getElementById("timestamps");
+        var links = timestamps.getElementsByTagName("a");
+
+    
+        function back10Sec(){
+            player.currentTime(player.currentTime()-10);
+        }
+    
+        function skip10Sec(){
+            player.currentTime(player.currentTime()+10);
+        }
+
+         // Function to update the highlighted link
+         function updateHighlightedLink(currentTime) {
+            for (var i = 0; i < links.length; i++) {
+                var time = parseFloat(links[i].getAttribute("data-time"));
+                var nextTime = i < links.length - 1 ? parseFloat(links[i + 1].getAttribute("data-time")) : Infinity;
+
+                if (currentTime >= time && currentTime < nextTime) {
+                    links[i].classList.add("highlight"); // Add highlight class
+                } else {
+                    links[i].classList.remove("highlight"); // Remove highlight class
+                }
+            }
+        }
+
+
+    // Event listener to update highlighted link when video time is updated
+        player.on("timeupdate", function() {
+            updateHighlightedLink(player.currentTime());
+        });
+
+        // Event listener for keydown event
+        document.addEventListener("keydown", function(event) {
+            if (event.keyCode === 39) { // Right arrow key
+                skip10Sec(); // Skip 10 seconds forward
+            } else if (event.keyCode === 37) { // Left arrow key
+                back10Sec(); // Skip 10 seconds backward
+            }
+        });
+
+
+        document.addEventListener("keydown", function(event) {
+            if (event.code === "Space") { // Check if space bar is pressed
+                if (player.paused()) { // Check if the video is paused
+                    player.play(); // Play the video
+                } else {
+                    player.pause(); // Pause the video
+                }
+            }
+        });
+
+        document.addEventListener("keydown", function(event) {
+            if (event.keyCode === 38) { // Right arrow key
+                player.volume(player.volume()+10); // Skip 10 seconds forward
+            } else if (event.keyCode === 40) { // Left arrow key
+                player.volume(player.volume()-10); // Skip 10 seconds backward
+            }
+        });
+
+        document.addEventListener("keydown", function(event) {
+            for(let i=48; i<=57; i++){
+                if(event.keyCode===i){
+                    let setTime = (((i-48)/10)*player.duration());
+                    player.currentTime(setTime);
+                    break;
+                }
+            }
+        });
+
+        function setTime(code,key){
+           
+        }
+
+
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function(event) {
+            event.preventDefault();
+
+            // Get the timestamp from the link's data-time attribute
+            var time = parseFloat(this.getAttribute("data-time"));
+
+            // Set the video player's current time to the timestamp
+            player.currentTime(time);
+    });
+    }
+
+   
+
+
+    </script>
+    </body>
+    </html>

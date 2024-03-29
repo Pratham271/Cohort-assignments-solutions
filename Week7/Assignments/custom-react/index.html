@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Custom Render</title>
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <script>
+    const reactElement = {
+      type: 'input',
+      props: {
+        value: 'Pratham Chauhan',
+        placeholder: 'Name'
+      }
+    };
+
+    function createCustomElement(reactElement){
+      const {type,props} = reactElement
+      const {value, placeholder} = props
+  
+      const inputValue = Object.keys(props)
+      .filter(prop => prop !== 'placeholder')
+      .map(prop =>  `${prop}=${props[prop]}`)
+      .join(" ")
+
+      const placeholderValue = Object.keys(props)
+      .filter(prop => prop!=='value')
+      .map(prop => `${prop}=${props[prop]}`)
+      .join(" ")
+
+      console.log(placeholderValue)
+
+      return `<${type} ${inputValue} ${placeholderValue} />`
+}
+    function customRender(reactElement, id){
+      const domElement = document.getElementById(id);
+      const html = createCustomElement(reactElement);
+      domElement.innerHTML = html;
+    }
+    
+    
+
+    
+    customRender(reactElement, 'container');
+  </script>
+</body>
+
+</html>

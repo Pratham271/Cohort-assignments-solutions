@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="title" placeholder="title">
+    <br><br>
+    <input type="text" id="description" placeholder="description">
+    <br><br>
+    <!-- <button onclick="newTodo()">Add todo</button> -->
+    <!-- <br><br> -->
+    <div id="container">
+
+    </div>
+    <script>
+        let globalid = 1;
+        function newTodo(){
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const parent = document.getElementById("container")
+            parent.appendChild(createChild(title,description,globalid++))
+     
+            const space = document.createElement("br")
+            parent.appendChild(space)
+            
+        }
+        function createChild(title,description,id){
+            const child = document.createElement("div")
+            const firstGrandChild = document.createElement("div")
+            firstGrandChild.innerHTML = title;
+            const secondGrandChild = document.createElement("div")
+            secondGrandChild.innerHTML = description;
+            const thirdGrandChild = document.createElement("button")
+            thirdGrandChild.innerHTML = "Mark as done"
+            //  second way
+            // thirdGrandChild.setAttribute("id",id)
+            thirdGrandChild.setAttribute("onclick",`markAsDone(${id})`)
+            child.appendChild(firstGrandChild)
+            child.appendChild(secondGrandChild)
+            child.appendChild(thirdGrandChild)
+            // first way
+            child.setAttribute("id",id)
+            return child
+        }
+
+        function updateDomAccToState(state){
+            const parent = document.getElementById("container")
+            parent.innerHTML = " "
+            for(let i=0; i<state.length; i++){
+                const child = createChild(state[i].title, state[i].description, state[i].id)
+                parent.appendChild(child)
+            }
+        }
+        function markAsDone(id){
+            const element = document.getElementById(id)
+            //  first way
+            element.children[2].innerHTML = "Done!"
+            // second way 
+            // element.innerHTML = "Done!"
+        }
+        window.setInterval(async()=> {
+            const res = await fetch("http://localhost:3000/todos")
+            const json = await res.json();
+            updateDomAccToState(json.todos)
+        },5000)
+    </script>
+</body>
+</html>

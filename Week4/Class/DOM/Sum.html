@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- oninput="calculateSum()" -->
+    <input id="num1" type="text" value="" oninput="debounceCalculateSum()">
+    <br></br>
+    <input id="num2" type="text" value="" oninput="debounceCalculateSum()">
+    <br></br>
+    <!-- <button onclick="calculateSum()">Calculate Sum</button> -->
+    <br></br>
+
+    <div id="finalSum"></div>
+    <script>
+        let timer = null;
+        function debounceCalculateSum(){
+            clearTimeout(timer)
+            timer = setTimeout(()=> {
+                calculateSum()
+            },500)
+            
+            
+        }
+    async function calculateSum() {
+            const num1 = parseInt(document.getElementById("num1").value) || 0; // If input is empty or not a number, default to 0
+            const num2 = parseInt(document.getElementById("num2").value) || 0; // If input is empty or not a number, default to 0
+            const response =  await fetch("http://localhost:3000/sum?n1="+num1+"&n2="+num2)
+            const data = await response.text()
+            document.getElementById("finalSum").innerHTML = "Sum: " + data;
+        }
+    </script>
+</body>
+</html>

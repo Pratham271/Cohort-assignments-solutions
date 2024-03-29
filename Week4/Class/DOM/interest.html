@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="principal"  oninput="debounceCalculateInterest()">
+    <br><br>
+    <input type="text" id="rate" oninput="debounceCalculateInterest()">
+    <br><br>
+    <input type="text" id="time" oninput="debounceCalculateInterest()">
+    <br><br>
+    <div id="interest"></div>
+    <script>
+        let timer = null;
+        function debounceCalculateInterest(){
+            clearTimeout(timer)
+            timer = setTimeout(()=> {
+                calculateInterest()
+            },500)
+        }
+        async function calculateInterest(){
+            const p = parseFloat(document.getElementById("principal").value) || 1
+            const r = parseFloat(document.getElementById("rate").value) || 1
+            const t = parseFloat(document.getElementById("time").value) || 1
+
+            const response = await fetch("http://localhost:3000/interest?p="+p+"&r="+r+"&t="+t)
+            const data = await response.json();
+            const total = data.total;
+            const interest = data.interest;
+            document.getElementById("interest").innerHTML = "Rate of interest is : " +interest+ "<br> Total amount now is: " +total;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Are you idiot</h1>
+        <div id="buttons" style="display: flex;">
+            <button onclick="changeText()">Yes</button>
+            <button style="margin-left: 13px;">No</button>
+        </div>
+    </div>
+    <script>
+        function changeText(){
+            const element = document.getElementById("buttons")
+            element.innerHTML = "I knew it haha!!"
+        }
+    </script>
+</body>
+</html>

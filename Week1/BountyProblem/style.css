@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+#timestamps {
+    margin-top: 20px;
+    margin-right: 280px;
+    padding: 10px;
+    border: 2px solid black;
+  }
+  
+#timestamps a {
+    display: block;
+    margin: 15px;
+    color: #00f;
+    text-decoration: none;
+    text-align: center;
+    
+}
+
+.highlight {
+    background-color: yellow; /* Change to whatever highlight style you prefer */
+    
+}

@@ -1,0 +1,20 @@
+name = "post-with-tags"
+compatibility_date = "2023-12-01"
+
+[vars]
+# MY_VAR = "my-variable"
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiYWJlNGE5M2UtNTg3ZC00ZDk3LTkxYzctYzQ4NTVkMGIxMDhhIiwidGVuYW50X2lkIjoiZDVkZmM1MmU4YmY4N2QxNzEwYzIyNmE0YmE3MTE1MGIyN2E2MDAxNTdhNzIzODNjYjBkODRhNDljMDg0MjliOSIsImludGVybmFsX3NlY3JldCI6IjBjNGNiYTNlLTYxMDYtNGQ1Yy1hZTIxLWE2MDlkYTM4MGIyZSJ9.y2bAE3qwsVR778aXiAbTFSaA9Xv4ecpP_q9TaX4Bwx4"
+JWT_SECRET = "very_very_SECRET"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""

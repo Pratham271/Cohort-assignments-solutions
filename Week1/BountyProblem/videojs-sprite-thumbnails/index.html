@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>videojs-sprite-thumbnails Demo</title>
+  <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
+
+</head>
+<body>
+  <video id="videojs-sprite-thumbnails-player" class="video-js vjs-default-skin"
+         data-setup='{"aspectRatio":"12:5"}' controls>
+    <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
+    <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm'>
+  </video>
+  <ul>
+    <li><a href="/test/debug.html">Run unit tests in browser.</a></li>
+
+  </ul>
+  <script src="node_modules/video.js/dist/video.js"></script>
+  <script src="dist/videojs-sprite-thumbnails.js"></script>
+  <script>
+    (function(window, videojs) {
+      var examplePlayer = window.examplePlayer = videojs('videojs-sprite-thumbnails-player');
+      examplePlayer.spriteThumbnails({
+        // interval: 1 // (default)
+        url: 'img/oceans-thumbs.jpg',
+        width: 240,
+        height: 100
+      });
+      examplePlayer.spriteThumbnails().log.level('debug');
+    }(window, window.videojs));
+  </script>
+</body>
+</html>

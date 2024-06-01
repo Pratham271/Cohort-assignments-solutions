@@ -1,7 +1,7 @@
 import { WebSocket } from "ws"
 import { uuid } from 'uuidv4';
 
-interface User {
+export interface User {
     id: string
     socket: WebSocket,
     name: string
@@ -42,6 +42,14 @@ export class UserManager{
             type: "send-offer",
             roomId
         })
+    }
+
+    onOffer(){
+
+    }
+
+    onAnswer(){
+        
     }
 
     generate(){

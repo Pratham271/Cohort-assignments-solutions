@@ -1,5 +1,6 @@
 import { WebSocket } from "ws"
 import { uuid } from 'uuidv4';
+import { Room, RoomManager } from "./RoomManager";
 
 export interface User {
     id: string
@@ -11,10 +12,14 @@ let GLOBAL_ROOM_ID =1;
 export class UserManager{
     private users: User[];
     private queue: string[];
+    private rooms: Map<string, Room>;
+    private roomManager: RoomManager
 
     constructor(){
         this.users = [];
         this.queue = [];
+        this.rooms = new Map<string, Room>();
+        this.roomManager= new RoomManager();
     }
     addUser(name: string, socket: WebSocket){
         const id = uuid()
@@ -38,18 +43,28 @@ export class UserManager{
         const user1 = this.users.find(u => u.id === this.queue.pop())
         const user2 = this.users.find(u => u.id === this.queue.pop())
         const roomId = this.generate();
-        user1?.socket.emit("new-room", {
-            type: "send-offer",
+        user1?.socket.emit("send-offer", {
             roomId
+        })
+        if(!user1 || !user2){
+            return
+        }
+
+        const room = this.roomManager.createRoom(user1,user2)
+    }
+
+    onOffer(roomId: string, sdp: string){
+        const user2 = this.rooms.get(roomId)?.user1;
+        user2?.socket.emit("offer", {
+            sdp
         })
     }
 
-    onOffer(){
-
-    }
-
-    onAnswer(){
-        
+    onAnswer(roomId: string, sdp: string){
+        const user2 = this.rooms.get(roomId)?.user1;
+        user2?.socket.emit("answer", {
+            sdp
+        })
     }
 
     generate(){

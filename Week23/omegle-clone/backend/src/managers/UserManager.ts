@@ -1,6 +1,6 @@
 import { WebSocket } from "ws"
 import { uuid } from 'uuidv4';
-import { Room, RoomManager } from "./RoomManager";
+import { RoomManager } from "./RoomManager";
 
 export interface User {
     id: string

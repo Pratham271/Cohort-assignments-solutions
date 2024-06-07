@@ -27,6 +27,7 @@ export class UserManager{
         })
         this.queue.push(id)
         this.clearQueue()
+        this.initHandlers(socket)
     }
 
     removeUser(socketId: string){
@@ -52,6 +53,14 @@ export class UserManager{
         const room = this.roomManager.createRoom(user1,user2)
     }
 
+    initHandlers(socket:WebSocket){
+        socket.on("offer", ({sdp, roomId}: {sdp:string, roomId: string}) => {
+            this.roomManager.onOffer(roomId, sdp)
+        })
+        socket.on("answer", ({sdp, roomId}: {sdp:string, roomId: string}) => {
+            this.roomManager.onAnswer(roomId, sdp)
+        })
+    }
     
     generate(){
         return GLOBAL_ROOM_ID++;

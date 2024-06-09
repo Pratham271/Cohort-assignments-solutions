@@ -29,9 +29,12 @@ export class UserManager{
         socket.send("lobby")
         this.clearQueue()
         this.initHandlers(socket)
+        return id
     }
 
     removeUser(socketId: string){
+        const user = this.users.find(u => u.id === socketId);
+        
         this.users = this.users.filter(u => u.id !== socketId)
         this.queue = this.queue.filter(q => q !== socketId)
     }

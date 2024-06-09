@@ -26,6 +26,7 @@ export class UserManager{
             id,name, socket
         })
         this.queue.push(id)
+        socket.send("lobby")
         this.clearQueue()
         this.initHandlers(socket)
     }

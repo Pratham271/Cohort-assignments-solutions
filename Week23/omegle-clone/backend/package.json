@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "uuid": "^9.0.1",
     "uuidv4": "^6.2.13",
     "ws": "^8.17.0"

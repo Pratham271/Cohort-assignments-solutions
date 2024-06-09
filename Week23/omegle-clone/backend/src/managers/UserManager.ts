@@ -25,13 +25,14 @@ export class UserManager{
         this.users.push({
             id,name, socket
         })
+    
         this.queue.push(id)
         socket.send("lobby")
         this.clearQueue()
         this.initHandlers(socket)
         return id
     }
-
+    
     removeUser(socketId: string){
         const user = this.users.find(u => u.id === socketId);
         
